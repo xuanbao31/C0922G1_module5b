@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<h2>BusList</h2>
+<table class="table table-dark">
+    <tr>
+        <th>STT</th>
+        <th>codeBus</th>
+        <th>phoneNumber</th>
+        <th>email</th>
+        <th>timeStart</th>
+        <th>endTime</th>
+        <th>locationStart</th>
+        <th>locationEnd</th>
+        <th>busType</th>
+        <th>ChucNang</th>
+    </tr>
+    <tr th:each="bus,var:${busList}">
+        <td th:text="${var.count}"></td>
+        <td th:text="${bus.codeBus}"></td>
+        <td th:text="${bus.phoneNumber}"></td>
+        <td th:text="${bus.email}"></td>
+        <td th:text="${bus.timeStart}"></td>
+        <td th:text="${bus.endTime}"></td>
+        <td th:text="${bus.locationStart}"></td>
+        <td th:text="${bus.locationEnd}"></td>
+        <td th:text="${bus.busType.name}"></td>
+        <td><a th:href="@{/{id}/delete(id=${bus.id})}">Delete</a></td>
+    </tr>
+</table>
+
+<div>
+    <a th:href="@{'/list'(page=${busList.number - 1})}"
+       th:if="${busList.hasPrevious()}">Previous</a>
+
+    <span th:text="${busList.number + 1}"></span>
+    <span th:text="${busList.totalPages }"></span>
+
+    <a th:href="@{'/list'(page = ${busList.number + 1})}"
+       th:if="${busList.hasNext()}">Next</a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
